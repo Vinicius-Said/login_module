@@ -96,5 +96,3 @@ Um usuário `admin` (senha: `admin123`) é criado automaticamente na primeira in
 ---
 
 ## Licença
-
-Este projeto é distribuído sob a Licença MIT.
