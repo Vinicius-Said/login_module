@@ -1,0 +1,53 @@
+<div th:fragment="content">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-4">
+                    <h2 class="card-title text-center mb-4" th:text="${pageTitle}"></h2>
+                    <form th:action="@{/admin/users/save}" th:object="${user}" method="post">
+                        <input type="hidden" th:field="*{id}" />
+
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Nome de Usuário</label>
+                            <input type="text" id="username" class="form-control" th:field="*{username}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" id="email" class="form-control" th:field="*{email}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="rawPassword" class="form-label">Senha</glabel>
+                                <div class="input-group">
+                                    <input type="password" id="rawPassword" name="rawPassword" class="form-control"
+                                           th:placeholder="${user.id == null} ? 'Senha obrigatória' : 'Deixe em branco para não alterar'">
+                                    <button class="btn btn-outline-secondary toggle-password" type="button" title="Mostrar/Ocultar Senha">
+                                        <i class="bi bi-eye-slash-fill"></i>
+                                    </button>
+                                </div>
+                                <div class="form-text">
+                                    Para novos usuários, a senha é obrigatória. Para editar, só preencha se quiser alterar.
+                                </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Perfis (Roles)</label>
+                            <div class="border rounded p-2">
+                                <div th:each="role : ${allRoles}" class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="roleIds" th:value="${role.id}"
+                                           th:id="${'role-' + role.id}"
+                                           th:checked="${user.roles != null and #lists.contains(user.roles.![id], role.id)}">
+                                    <label class="form-check-label" th:for="${'role-' + role.id}" th:text="${role.name}"></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a th:href="@{/admin/dashboard}" class="btn btn-secondary me-md-2"><i class="bi bi-x-lg me-2"></i>Cancelar</a>
+                            <button type="submit" class="btn btn-primary"><i class="bi bi-check-lg me-2"></i>Salvar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

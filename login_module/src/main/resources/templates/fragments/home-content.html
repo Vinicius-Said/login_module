@@ -1,0 +1,17 @@
+<div th:fragment="content">
+    <div class="p-5 mb-4 bg-white rounded-3 shadow-sm text-center">
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold"><i class="bi bi-house-heart-fill me-3"></i>Bem-vindo ao Sistema!</h1>
+            <p class="col-md-8 fs-4 mx-auto">Este é um módulo de login seguro e reutilizável. Use o menu acima para navegar.</p>
+
+            <div sec:authorize="isAuthenticated()">
+                <hr class="my-4">
+                <p>Você está logado como: <strong sec:authentication="name"></strong></p>
+            </div>
+            <div sec:authorize="!isAuthenticated()">
+                <hr class="my-4">
+                <p>Faça <a th:href="@{/login}">login</a> ou <a th:href="@{/register}">registre-se</a> para continuar.</p>
+            </div>
+        </div>
+    </div>
+</div>
